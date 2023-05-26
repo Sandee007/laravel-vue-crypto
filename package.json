@@ -1,0 +1,26 @@
+{
+  "type": "module",
+  "name": "laravel-vue-crypto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prod" : "uglifyjs -o index.min.js index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sandee007/laravel-vue-crypto.git"
+  },
+  "author": "Sandee007",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sandee007/laravel-vue-crypto/issues"
+  },
+  "homepage": "https://github.com/Sandee007/laravel-vue-crypto#readme",
+  "dependencies": {
+    "crypto-js": "^4.1.1",
+    "locutus": "^2.0.16",
+    "uglify-js": "^3.17.4"
+  }
+}

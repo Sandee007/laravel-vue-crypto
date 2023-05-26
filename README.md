@@ -1,2 +1,2 @@
 # laravel-vue-crypto
-f
+auto push test 1234567
