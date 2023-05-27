@@ -102,7 +102,7 @@ try {
         this.$LaravelVueCrypto.encrypt(dataToEncrypt)
     );
 
-    decryptedData = this.$LaravelVueCrypto.decrypt(res?.data?.users);
+    const decryptedData = this.$LaravelVueCrypto.decrypt(res?.data?.users);
     console.log({ decryptedData });
 
 } catch (err) {
