@@ -23,15 +23,15 @@ npm i laravel-vue-crypto
 <br>
 Import the package :
 
-```
+```js
 import LaravelVueCrypto from 'laravel-vue-crypto'
 ```
 
 <br>
 Then register it as a vue-global-property
 
-```
-CONST APP_KEY = 'laravel-app-key' # .env's APP_KEY
+```js
+CONST APP_KEY = 'laravel-app-key' // laravel .env's APP_KEY
 app.config.globalProperties.$LaravelVueCrypto = new LaravelVueCrypto(APP_KEY)
 ```
 
@@ -41,19 +41,19 @@ app.config.globalProperties.$LaravelVueCrypto = new LaravelVueCrypto(APP_KEY)
 
 ### **Encrypt data**
 
-```
+```js
 this.$LaravelVueCrypto.encrypt({'id': 1})
 ```
 
 encrypt method always returns an object with attribute of payload. payload consists the encrypted string.
 
-```
+```js
 {payload : 'encrypted-string'}
 ```
 
 ### **Decrypt data**
 
-```
+```js
 this.$LaravelVueCrypto.decrypt(data)
 ```
 
@@ -61,7 +61,23 @@ this.$LaravelVueCrypto.decrypt(data)
 
 ## **Example**
 
+### app.js
+```js
+createInertiaApp({
+    setup({ el, App, props, plugin }) {
+        const app = createApp({ render: () => h(App, props) })
+
+        app.config.globalProperties.$LaravelVueCrypto = new LaravelVueCrypto(import.meta.env.VITE_APP_KEY)
+
+        app.mount(el);
+        return app;
+    },
+});
 ```
+
+
+### .vue file
+```js
 const dataToEncrypt = {
     'id' : 1,
     'status' : 0
