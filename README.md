@@ -89,7 +89,7 @@ try {
         this.$LaravelVueCrypto.encrypt(dataToEncrypt)
     );
 
-    decryptedData = this.$LaravelVueCrypto.decrypt(res?.data?.payload);
+    const decryptedData = this.$LaravelVueCrypto.decrypt(res?.data?.payload);
     console.log({ decryptedData });
 
 } catch (err) {
