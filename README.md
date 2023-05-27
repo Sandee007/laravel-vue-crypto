@@ -39,22 +39,35 @@ app.config.globalProperties.$LaravelVueCrypto = new LaravelVueCrypto(APP_KEY)
 
 ## **3. Usage**
 
-### **Encrypt data**
+### **3.1 Encrypt data**
 
 ```js
 this.$LaravelVueCrypto.encrypt({'id': 1})
 ```
 
-encrypt method always returns an object with attribute of payload. payload consists the encrypted string.
+* *encrypt method always returns an object with attribute **payload**. payload consists the encrypted string.*
 
 ```js
 {payload : 'encrypted-string'}
 ```
 
-### **Decrypt data**
+* *now in order to decrypt the data from the laravel controller, use laravel's **decrypt** helper **without serialization***.
+
+```php
+json_decode(decrypt($request, unserialize: false));
+```
+
+<br>
+
+### **3.2 Decrypt data**
 
 ```js
-this.$LaravelVueCrypto.decrypt(data)
+this.$LaravelVueCrypto.decrypt(encryptedData)
+```
+* *to encrypt data from the laravel controller, use **encrypt** helper*
+
+```php
+encrypt(json_encode($dataToEncrypt));
 ```
 
 <br>
@@ -89,10 +102,25 @@ try {
         this.$LaravelVueCrypto.encrypt(dataToEncrypt)
     );
 
-    const decryptedData = this.$LaravelVueCrypto.decrypt(res?.data?.payload);
+    decryptedData = this.$LaravelVueCrypto.decrypt(res?.data?.users);
     console.log({ decryptedData });
 
 } catch (err) {
     console.log({ err });
 }
+```
+
+
+### laravel controller
+```php
+ public function handleTestRoute(Request $request){
+    $request = json_decode(decrypt($request->payload, unserialize: false));
+
+    // ... 
+
+    $users = User::all();
+    $users = encrypt(json_encode($users))
+
+    return response()->json(compact('users'))
+}  
 ```
